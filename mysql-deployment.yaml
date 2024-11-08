@@ -31,7 +31,7 @@ spec:
       volumes:
         - name: config-map
           configMap:
-            - name: app-configmap
-              items:
-                - key: "mysql-schema.sql"
-                  path: "mysql-schema.sql"
+            name: app-configmap
+            items:
+              - key: "mysql-schema.sql"
+                path: "mysql-schema.sql"
