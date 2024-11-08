@@ -24,3 +24,13 @@ spec:
                 secretKeyRef:
                   name: mysecret-file
                   key: mysql_root_pass
+          volumeMounts:
+            - name: config-map
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: config-map
+          configMap:
+            - name: app-configmap
+              items:
+                - key: "mysql-schema.sql"
+                  path: "mysql-schema.sql"
