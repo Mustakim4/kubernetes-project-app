@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: express-app
+  labels:
+    app: express-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: express-app
+  template:
+    metadata:
+      labels:
+        app: express-app
+    spec:
+      containers:
+        - name: express-app
+          image: mustakquimdiwan/express_app
+          ports:
+            - containerPort: 3000
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret-file
+                  key: mysql_root_pass
+            - name: MYSQL_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: app-configmap
+                  key: mysql_host
+            - name: MYSQL_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: app-configmap
+                  key: mysql_user
