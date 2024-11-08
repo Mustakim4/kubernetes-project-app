@@ -28,6 +28,15 @@ spec:
           volumeMounts:
             - name: config-map
               mountPath: /docker-entrypoint-initdb.d
+          readinessProbe:
+            exec:
+              command:
+                - "mysqladmin"
+                - "ping"
+                - "-h"
+                - "localhost"
+            initialDelaySeconds: 10
+            periodSeconds: 5
       volumes:
         - name: config-map
           configMap:
