@@ -3,8 +3,7 @@ kind: ConfigMap
 metadata:
   name: app-configmap
 data:
-  mysql_host: mysql-db
-  mysql_user: root
+  mysql_host: mysql-service
 
   mysql-schema.sql: |
     DROP DATABASE IF EXISTS todos_db;
