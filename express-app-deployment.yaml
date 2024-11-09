@@ -20,11 +20,6 @@ spec:
           ports:
             - containerPort: 3000
           env:
-            - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysecret-file
-                  key: mysql_root_pass
             - name: MYSQL_HOST
               valueFrom:
                 configMapKeyRef:
@@ -32,6 +27,12 @@ spec:
                   key: mysql_host
             - name: MYSQL_USER
               valueFrom:
-                configMapKeyRef:
-                  name: app-configmap
+                secretKeyRef:
+                  name: mysecret-file
                   key: mysql_user
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret-file
+                  key: mysql_root_pass
+            
